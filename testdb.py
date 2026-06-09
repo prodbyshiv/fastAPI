@@ -28,3 +28,6 @@ for student in students:
         student.email,
         student.cgpa
     )
+
+    # u crete a blueprint like studentdb
+    # when u call it like studentdb() it creates an object of that type.
