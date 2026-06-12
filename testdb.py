@@ -1,4 +1,4 @@
-from database import SessionLocal
+from student_managment_api.database import SessionLocal
 from models import StudentDB
 
 db = SessionLocal()

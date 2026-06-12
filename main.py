@@ -1,4 +1,4 @@
-from database import engine
+from student_managment_api.database import engine
 from models import Base
 
 Base.metadata.create_all(bind=engine)
