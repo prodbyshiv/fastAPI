@@ -1,7 +1,5 @@
 from sqlalchemy import Column, Integer, String, Float
-from sqlalchemy.orm import declarative_base
-
-Base = declarative_base()
+from student_managment_api.database import Base
 
 class StudentDB(Base):
     __tablename__ = "students"

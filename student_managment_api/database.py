@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base
 # sqlalchemy helps python talk to databases
 
 DATABASE_URL = "sqlite:///students.db" 
@@ -8,3 +9,5 @@ DATABASE_URL = "sqlite:///students.db"
 engine = create_engine(DATABASE_URL) #Connect Python to that database.
 
 SessionLocal = sessionmaker(bind=engine)
+
+Base = declarative_base()
