@@ -9,5 +9,9 @@ DATABASE_URL = "sqlite:///students.db"
 engine = create_engine(DATABASE_URL) #Connect Python to that database.
 
 SessionLocal = sessionmaker(bind=engine)
+# This creates a custom class called SessionLocal.
+# SessionLocal is a factory for Sessions. 
+# Every time you want to actually read or write to the database, you will instantiate a new session from this (e.g., db = SessionLocal()).
+# bind=engine connects this session factory directly to your database pipeline.
 
 Base = declarative_base()
