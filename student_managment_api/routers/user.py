@@ -5,6 +5,7 @@ from student_managment_api.schemas.user import UserCreate
 from student_managment_api.schemas.user import UserLogin
 from student_managment_api.auth import hash_password
 from student_managment_api.auth import verify_password
+from student_managment_api.jwt_handler import create_access_token
 
 router = APIRouter()
 
@@ -58,4 +59,9 @@ def login(user: UserLogin):
 ):
         return {"message": "Invalid password"}
 
-    return {"message": "Login successful"}
+    token = create_access_token(db_user.id)
+
+    return {
+        
+    "access_token": token
+}
