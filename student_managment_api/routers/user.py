@@ -6,6 +6,7 @@ from student_managment_api.schemas.user import UserLogin
 from student_managment_api.auth import hash_password
 from student_managment_api.auth import verify_password
 from student_managment_api.jwt_handler import create_access_token
+from student_managment_api.jwt_handler import verify_token
 
 router = APIRouter()
 
@@ -65,3 +66,26 @@ def login(user: UserLogin):
         
     "access_token": token
 }
+
+@router.get("/me")
+def get_me(token: str):
+
+    db = SessionLocal()
+
+    payload = verify_token(token)
+
+    user_id = payload["user_id"]
+
+    user = (
+        db.query(UserDB)
+        .filter(UserDB.id == user_id)
+        .first()
+    )
+
+    return {
+        "id": user.id,
+        "username": user.username,
+        "email": user.email
+    }
+    
+
