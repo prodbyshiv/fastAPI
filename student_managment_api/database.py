@@ -15,3 +15,4 @@ SessionLocal = sessionmaker(bind=engine)
 # bind=engine connects this session factory directly to your database pipeline.
 
 Base = declarative_base()
+#Base ka kaam hai yeh batana SQLAlchemy ko: "Yeh class normal nahi hai, isse table samjho."
