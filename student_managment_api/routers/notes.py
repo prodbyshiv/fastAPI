@@ -47,3 +47,20 @@ def get_notes(token: str):
     )
 
     return notes
+
+@router.get("/notes")
+def get_notes(token: str):
+
+    db = SessionLocal()
+
+    payload = verify_token(token)
+
+    user_id = payload["user_id"]
+
+    notes = (
+        db.query(NoteDB)
+        .filter(NoteDB.user_id == user_id)
+        .all()
+    )
+
+    return notes
