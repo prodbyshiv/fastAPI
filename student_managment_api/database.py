@@ -16,3 +16,12 @@ SessionLocal = sessionmaker(bind=engine)
 
 Base = declarative_base()
 #Base ka kaam hai yeh batana SQLAlchemy ko: "Yeh class normal nahi hai, isse table samjho."
+def get_db():
+
+    db = SessionLocal()
+
+    try:
+        yield db
+
+    finally:
+        db.close()
