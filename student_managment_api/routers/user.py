@@ -7,6 +7,11 @@ from student_managment_api.auth import hash_password
 from student_managment_api.auth import verify_password
 from student_managment_api.jwt_handler import create_access_token
 from student_managment_api.jwt_handler import verify_token
+from fastapi import Depends
+from student_managment_api.dependencies import get_current_user
+from student_managment_api.models.user_db import UserDB
+
+
 
 router = APIRouter()
 
@@ -68,24 +73,13 @@ def login(user: UserLogin):
 }
 
 @router.get("/me")
-def get_me(token: str):
-
-    db = SessionLocal()
-
-    payload = verify_token(token)
-
-    user_id = payload["user_id"]
-
-    user = (
-        db.query(UserDB)
-        .filter(UserDB.id == user_id)
-        .first()
-    )
-
+def get_me(
+    current_user: UserDB = Depends(get_current_user)
+):
     return {
-        "id": user.id,
-        "username": user.username,
-        "email": user.email
+        "id": current_user.id,
+        "username": current_user.username,
+        "email": current_user.email
     }
     
 
